@@ -6,8 +6,8 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-import React from "react";
 import { Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -64,26 +64,26 @@ const Footer = () => {
           <div className=" flex flex-col items-end md:items-end mt-auto">
             <h3 className="text-lg font-semibold">Join Us</h3>
             <div className="flex space-x-4 mt-2">
-              <FaYoutube
+              <Link to={"https://www.youtube.com/@TheBlockCapitol"} target="_blank"><FaYoutube
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
-              />
-              <FaFacebookF
+              /></Link>
+              {/* <FaFacebookF
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
-              />
-              <FaTwitter
+              /> */}
+              <Link to={"https://x.com/theblockcapitol"} target="_blank"><FaTwitter
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
-              />
-              <FaInstagram
+              /></Link>
+              {/* <FaInstagram
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
-              />
-              <FaLinkedinIn
+              /> */}
+              <Link to={"https://www.linkedin.com/company/theblockcapitol"} target="_blank"> <FaLinkedinIn
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
-              />
+              /></Link>
             </div>
           </div>
         </div>

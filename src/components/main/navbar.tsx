@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { name: "Home", link: "/" },
-  { name: "About", link: "/about" },
-  { name: "Programmes", link: "/programmes" },
-  { name: "Community", link: "/community" },
+  { name: "Home", sectionId: "hero" },
+  { name: "About", sectionId: "who-we-are" },
+  { name: "Programmes", sectionId: "blockchain-courses" },
+  { name: "Community", sectionId: "join-network" },
   { name: "Blog", link: "/blog" },
-  { name: "Contact", link: "/contact" },
+  { name: "Contact", sectionId: "footer" },
 ];
 
 const Navbar = () => {
@@ -33,18 +32,22 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => {
-    console.log(isOpen);
-
     setIsOpen(!isOpen);
+  };
+
+  // Handle smooth scrolling for section navigation
+  const handleScroll = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false); // Close mobile menu after clicking
   };
 
   return (
     <nav
-      className={`flex justify-between items-center py-4 px-6 md:px-12 lg:px-24 fixed top-0 left-0 right-0 z-20 transition-all ${
-        isSticky
-          ? "bg-white/50 backdrop-blur-sm" // Soft blur and transparent background
-          : "bg-transparent"
-      }`}
+      className={`flex justify-between items-center py-4 px-6 md:px-12 lg:px-24 fixed top-0 left-0 right-0 z-20 transition-all ${isSticky ? "bg-white/50 backdrop-blur-sm" : "bg-transparent"
+        }`}
     >
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -59,14 +62,27 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
         className="hidden md:flex space-x-6 text-secondary font-medium"
       >
-        {navItems.map(({ name, link }) => (
+        {navItems.map(({ name, sectionId }) => (
           <li key={name} className="relative group cursor-pointer">
-            <Link
-              to={link}
-              className="hover:text-red-800 transition-colors duration-300"
-            >
-              {name}
-            </Link>
+            {sectionId ? (
+              <a
+                href={`#${sectionId}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScroll(sectionId);
+                }}
+                className="hover:text-red-800 transition-colors duration-300"
+              >
+                {name}
+              </a>
+            ) : (
+              <Link
+                to={'#'}
+                className="hover:text-red-800 transition-colors duration-300"
+              >
+                {name}
+              </Link>
+            )}
             <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
           </li>
         ))}
@@ -89,22 +105,33 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute top-20 left-0 right-0 flex flex-col itemscenter space-y-4 p-4 text-secondary text-left font-medium md:hidden h-screen bg-white"
+          className="absolute top-20 left-0 right-0 flex flex-col items-center space-y-4 p-4 text-secondary text-left font-medium md:hidden h-screen bg-white"
         >
-          {navItems
-            .filter(({ name }) => name !== "Home")
-            .map(({ name, link }) => (
-              <li key={name} className="relative group cursor-pointer px-3">
+          {navItems.map(({ name, sectionId }) => (
+            <li key={name} className="relative group cursor-pointer px-3">
+              {sectionId ? (
+                <a
+                  href={`#${sectionId}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScroll(sectionId);
+                  }}
+                  className="hover:text-red-800 transition-colors duration-300"
+                >
+                  {name}
+                </a>
+              ) : (
                 <Link
-                  to={link}
+                  to={"#"}
                   className="hover:text-red-800 transition-colors duration-300"
                   onClick={toggleMenu}
                 >
                   {name}
                 </Link>
-                <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              </li>
-            ))}
+              )}
+              <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </li>
+          ))}
           <button className="bg-secondary hover:bg-red-700 text-white px-4 py-3 rounded">
             Join Cohort
           </button>

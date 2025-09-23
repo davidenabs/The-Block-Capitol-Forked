@@ -4,6 +4,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaYoutube,
+  FaTelegram,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
@@ -84,6 +85,11 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white cursor-pointer"
                 size={20}
               /></Link>
+              <Link to={"https://t.me/theblockcapitol"} target="_blank">
+                <FaTelegram
+                  className="text-gray-400 hover:text-white cursor-pointer"
+                  size={20}
+                /></Link>
             </div>
           </div>
         </div>

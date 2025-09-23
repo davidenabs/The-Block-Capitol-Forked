@@ -8,7 +8,7 @@ const navItems = [
   { name: "About", sectionId: "who-we-are" },
   { name: "Programmes", sectionId: "blockchain-courses" },
   { name: "Community", sectionId: "join-network" },
-  { name: "Blog", link: "/blog" },
+  // { name: "Blog", link: "/blog" },
   { name: "Contact", sectionId: "footer" },
 ];
 
